@@ -183,6 +183,14 @@ export interface IuguInvoice {
   logs?: IuguLog[];
 }
 
+export interface IuguConfigPayments {
+  pix:IuguConfigAccountPix;
+}
+
+interface IuguConfigAccountPix {
+  active: boolean;
+}
+
 export interface IuguSubscription {
   id?: string;
   suspended?: boolean;
@@ -352,6 +360,7 @@ export interface IuguConfigAccount {
   auto_advance_option?: number;
   bank_slip?: IuguConfigAccountBankSlip;
   credit_card?: IuguConfigAccountCreditCard;
+  pix?: IuguConfigAccountPix;
   payment_email_notification?: string;
   payment_email_notification_receiver?: string;
   early_payment_discount?: string;
