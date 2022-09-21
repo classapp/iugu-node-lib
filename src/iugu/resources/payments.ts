@@ -14,7 +14,6 @@ class IuguPayments extends IuguCommon<IuguConfigPayments> {
       urlParams: []
     })(data, urlParams)
   }
-
 }
 
 export default new IuguPayments()

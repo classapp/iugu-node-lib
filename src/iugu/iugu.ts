@@ -8,6 +8,7 @@ import IuguMarketPlaces from './resources/marketplaces'
 import IuguPlans from './resources/plans'
 import IuguSubscriptions from './resources/subscriptions'
 import IuguTransfers from './resources/transfers'
+import IuguPayments from './resources/payments'
 
 class Iugu {
   public get customers (): typeof IuguCustomers {
@@ -32,6 +33,10 @@ class Iugu {
 
   public get marketplaces (): typeof IuguMarketPlaces {
     return IuguMarketPlaces
+  }
+
+  public get payments (): typeof IuguPayments {
+    return IuguPayments
   }
 
   public get plans (): typeof IuguPlans {
