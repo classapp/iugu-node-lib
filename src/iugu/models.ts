@@ -183,8 +183,8 @@ export interface IuguInvoice {
   logs?: IuguLog[];
 }
 
-export interface IuguConfigPayments {
-  pix:IuguConfigAccountPix;
+export interface IuguPixConfigResponse {
+  success: true;
 }
 
 interface IuguConfigAccountPix {
