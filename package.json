@@ -5,7 +5,8 @@
   "main": "lib/iugu.js",
   "types": "lib/iugu.d.ts",
   "scripts": {
-    "test": "jest --no-cache --detectOpenHandles",
+    "test": "jest",
+    "test:cov": "npm run test -- --coverage",
     "doc": "npx typedoc --out ./docs --mode file ./lib",
     "build": "npx tsc -p ./tsconfig.json",
     "prepare": "npm run build",
@@ -14,9 +15,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/V1pi/iugu-node-sdk.git"
+    "url": "https://github.com/classapp/iugu-node-sdk.git"
   },
-  "bugs:": "https://github.com/V1pi/iugu-node-sdk/issues",
+  "bugs:": "https://github.com/classapp/iugu-node-sdk/issues",
   "keywords": [
     "iugu",
     "sdk",
@@ -26,15 +27,15 @@
     "lib"
   ],
   "author": {
-    "name": "Vinicius Picanco",
-    "email": "viniciusspicanco@gmail.com"
+    "name": "ClassApp",
+    "email": "i@classapp.com.br"
   },
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "@babel/parser": "^7.8.4",
-    "@babel/types": "^7.8.3",
+    "@swc/core": "^1.3.4",
+    "@swc/jest": "^0.2.23",
     "@types/axios": "^0.14.0",
-    "@types/jest": "^25.1.4",
+    "@types/jest": "^27.5.2",
     "@types/node": "^13.11.0",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
@@ -47,13 +48,13 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "jest": "^25.1.0",
-    "jest-diff": "^25.1.0",
+    "jest": "^27.5.1",
+    "nock": "^13.2.9",
     "pretty-format": "^25.1.0",
-    "ts-jest": "^25.2.0",
+    "ts-node": "^10.9.1",
     "typedoc": "^0.16.10",
     "typedoc-plugin-no-inherit": "^1.1.10",
-    "typescript": "^3.7.5"
+    "typescript": "^4.8.3"
   },
   "dependencies": {
     "axios": "^0.21.1"

@@ -1,7 +1,7 @@
-import Iugu, { IuguClient, IuguPaymentToken, IuguInvoice, IuguCharge, IuguPaymentMethod } from '../src/iugu'
-
+import Iugu, { IuguClient, IuguPaymentToken, IuguInvoice, IuguCharge, IuguPaymentMethod, IuguAccount } from '../src/iugu'
 import * as fs from 'fs'
 import * as path from 'path'
+import nock from 'nock'
 
 interface IuguServices {
   accountId: string;
@@ -24,7 +24,123 @@ beforeAll(() => {
   iuguServices = JSON.parse(file)
   Iugu.setApiKey(iuguServices.apiKey)
 })
+test('should create account', async () => {
+  nock('https://api.iugu.com:443', { encodedQueryParams: true })
+    .post('/v1/marketplace/create_account', { name: 'ClassApp Account' })
+    .reply(200, { account_id: '34AE95C87EFE453BB7F1F756098BFD35', name: 'ClassApp Account', live_api_token: 'C75D1F3B8F1468983A5018B68B6DD5E656C8C3008F29D19F28515A8D01C6ECEC', test_api_token: 'D9C992307AA83A24092D6494759E39745B3837D708B58937ADD26A700D3D4FFD', user_token: 'E54892F5EC916E8889EEDE7274DB0922C3103AB07735A2361DC7C740234DF865', commissions: null }, [
+      'Date',
+      'Fri, 30 Sep 2022 13:32:00 GMT',
+      'Content-Type',
+      'application/json; charset=utf-8',
+      'Transfer-Encoding',
+      'chunked',
+      'Connection',
+      'close',
+      'X-HandledBy',
+      'api/v1/market_place#create_account',
+      'X-Cf-Block',
+      'DEFAULT',
+      'X-UA-Compatible',
+      'IE=Edge,chrome=1',
+      'ETag',
+      '"8528c7c0698d075144e5aa40ca8df77b"',
+      'Cache-Control',
+      'max-age=0, private, must-revalidate',
+      'X-Request-Id',
+      'e56aacc3c218d9a3ea1f7cb9e350b586',
+      'X-Runtime',
+      '1.146865',
+      'Vary',
+      'Origin',
+      'CF-Cache-Status',
+      'DYNAMIC',
+      'Set-Cookie',
+      '__cfruid=307427a2eefae0f643ef7d01dd23a7430def9d39-1664544720; path=/; domain=.iugu.com; HttpOnly; Secure; SameSite=None',
+      'Server',
+      'cloudflare',
+      'CF-RAY',
+      '752d526d894551d2-GRU',
+      'alt-svc',
+      'h3=":443"; ma=86400, h3-29=":443"; ma=86400'
+    ])
+  const account = {
+    name: 'ClassApp Account'
+  }
 
+  const spyCreateAccount = jest.spyOn(Iugu.marketplaces, 'createAccount')
+  const response = await Iugu.marketplaces.createAccount(account)
+  expect(spyCreateAccount).toHaveBeenCalledTimes(1)
+  expect(response).toStrictEqual({
+    account_id: '34AE95C87EFE453BB7F1F756098BFD35',
+    name: 'ClassApp Account',
+    live_api_token: 'C75D1F3B8F1468983A5018B68B6DD5E656C8C3008F29D19F28515A8D01C6ECEC',
+    test_api_token: 'D9C992307AA83A24092D6494759E39745B3837D708B58937ADD26A700D3D4FFD',
+    user_token: 'E54892F5EC916E8889EEDE7274DB0922C3103AB07735A2361DC7C740234DF865',
+    commissions: null
+  })
+})
+test('should verify account', async () => {
+  nock('https://api.iugu.com:443', { encodedQueryParams: true })
+    .post('/v1/accounts/34AE95C87EFE453BB7F1F756098BFD35/request_verification', { data: { physical_products: false, business_type: 'Escola', person_type: 'Pessoa Jurídica', automatic_transfer: true, cep: '87080005', city: 'Maringá', district: 'Cidade Universitária', state: 'PR', telephone: 5511970187000, price_range: 'Subconta', bank_ag: '3771', bank_cc: '50612-2', account_type: 'Corrente', bank: 'Itaú', address: 'Avenida Alziro Zarur', cnpj: '36296178000179', company_name: 'Empresa XPTO 2' } })
+    .reply(200, { id: 'E77BDA83E2134644A43231FB1A8789ED', data: { price_range: 'Subconta', physical_products: false, business_type: 'Escola', person_type: 'Pessoa Jurídica', automatic_transfer: true, address: 'Avenida Alziro Zarur', cep: '87080005', city: 'Maringá', state: 'PR', telephone: 5511970187000, bank: 'Itaú', bank_ag: '3771', account_type: 'Corrente', bank_cc: '50612-2', cnpj: '36296178000179', company_name: 'Empresa XPTO 2', bank_ispb: '60701190' }, account_id: '34AE95C87EFE453BB7F1F756098BFD35', created_at: '2022-09-30T11:03:25-03:00' }, [
+      'Date',
+      'Fri, 30 Sep 2022 14:03:27 GMT',
+      'Content-Type',
+      'application/json; charset=utf-8',
+      'Transfer-Encoding',
+      'chunked',
+      'Connection',
+      'close',
+      'X-HandledBy',
+      'api/v1/account#request_verification',
+      'X-Cf-Block',
+      'DEFAULT',
+      'X-UA-Compatible',
+      'IE=Edge,chrome=1',
+      'ETag',
+      '"bf93b54ab4f2ac99369b27cc86cb1255"',
+      'Cache-Control',
+      'max-age=0, private, must-revalidate',
+      'X-Request-Id',
+      'b26e61857e467191963f267d3d1ff0e5',
+      'X-Runtime',
+      '1.882028',
+      'Vary',
+      'Origin',
+      'CF-Cache-Status',
+      'DYNAMIC',
+      'Set-Cookie',
+      '__cfruid=a6b88726e500e60ed3ceee6809c4b12bc94d9018-1664546606; path=/; domain=.iugu.com; HttpOnly; Secure; SameSite=None',
+      'Server',
+      'cloudflare',
+      'CF-RAY',
+      '752d80797fcf4b40-GRU',
+      'alt-svc',
+      'h3=":443"; ma=86400, h3-29=":443"; ma=86400'
+    ])
+  const data = {
+    physical_products: false,
+    business_type: 'Escola',
+    person_type: 'Pessoa Jurídica',
+    automatic_transfer: true,
+    cep: '87080005',
+    city: 'Maringá',
+    district: 'Cidade Universitária',
+    state: 'PR',
+    telephone: 5511970187000,
+    price_range: 'Subconta',
+    bank_ag: '3771',
+    bank_cc: '50612-2',
+    account_type: 'Corrente',
+    bank: 'Itaú',
+    address: 'Avenida Alziro Zarur',
+    cnpj: '36296178000179',
+    company_name: 'Empresa XPTO 2'
+  }
+  const accountId = new Map().set('account_id', '34AE95C87EFE453BB7F1F756098BFD35')
+  const response = await Iugu.accounts.requestVerification({ data }, accountId)
+  expect(response.id).toBe('E77BDA83E2134644A43231FB1A8789ED')
+})
 test('should list invoices', async () => {
   const urlParams: Map<string, string> = new Map()
   urlParams.set('paid_at_from', '2019-01-30T00:00:00-03:00')
