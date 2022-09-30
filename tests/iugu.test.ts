@@ -79,189 +79,127 @@ test('should create account', async () => {
     commissions: null
   })
 })
-test('should verify account', async () => {
-  nock('https://api.iugu.com:443', { encodedQueryParams: true })
-    .post('/v1/accounts/34AE95C87EFE453BB7F1F756098BFD35/request_verification', { data: { physical_products: false, business_type: 'Escola', person_type: 'Pessoa Jurídica', automatic_transfer: true, cep: '87080005', city: 'Maringá', district: 'Cidade Universitária', state: 'PR', telephone: 5511970187000, price_range: 'Subconta', bank_ag: '3771', bank_cc: '50612-2', account_type: 'Corrente', bank: 'Itaú', address: 'Avenida Alziro Zarur', cnpj: '36296178000179', company_name: 'Empresa XPTO 2' } })
-    .reply(200, { id: 'E77BDA83E2134644A43231FB1A8789ED', data: { price_range: 'Subconta', physical_products: false, business_type: 'Escola', person_type: 'Pessoa Jurídica', automatic_transfer: true, address: 'Avenida Alziro Zarur', cep: '87080005', city: 'Maringá', state: 'PR', telephone: 5511970187000, bank: 'Itaú', bank_ag: '3771', account_type: 'Corrente', bank_cc: '50612-2', cnpj: '36296178000179', company_name: 'Empresa XPTO 2', bank_ispb: '60701190' }, account_id: '34AE95C87EFE453BB7F1F756098BFD35', created_at: '2022-09-30T11:03:25-03:00' }, [
-      'Date',
-      'Fri, 30 Sep 2022 14:03:27 GMT',
-      'Content-Type',
-      'application/json; charset=utf-8',
-      'Transfer-Encoding',
-      'chunked',
-      'Connection',
-      'close',
-      'X-HandledBy',
-      'api/v1/account#request_verification',
-      'X-Cf-Block',
-      'DEFAULT',
-      'X-UA-Compatible',
-      'IE=Edge,chrome=1',
-      'ETag',
-      '"bf93b54ab4f2ac99369b27cc86cb1255"',
-      'Cache-Control',
-      'max-age=0, private, must-revalidate',
-      'X-Request-Id',
-      'b26e61857e467191963f267d3d1ff0e5',
-      'X-Runtime',
-      '1.882028',
-      'Vary',
-      'Origin',
-      'CF-Cache-Status',
-      'DYNAMIC',
-      'Set-Cookie',
-      '__cfruid=a6b88726e500e60ed3ceee6809c4b12bc94d9018-1664546606; path=/; domain=.iugu.com; HttpOnly; Secure; SameSite=None',
-      'Server',
-      'cloudflare',
-      'CF-RAY',
-      '752d80797fcf4b40-GRU',
-      'alt-svc',
-      'h3=":443"; ma=86400, h3-29=":443"; ma=86400'
-    ])
-  const data = {
-    physical_products: false,
-    business_type: 'Escola',
-    person_type: 'Pessoa Jurídica',
-    automatic_transfer: true,
-    cep: '87080005',
-    city: 'Maringá',
-    district: 'Cidade Universitária',
-    state: 'PR',
-    telephone: 5511970187000,
-    price_range: 'Subconta',
-    bank_ag: '3771',
-    bank_cc: '50612-2',
-    account_type: 'Corrente',
-    bank: 'Itaú',
-    address: 'Avenida Alziro Zarur',
-    cnpj: '36296178000179',
-    company_name: 'Empresa XPTO 2'
-  }
-  const accountId = new Map().set('account_id', '34AE95C87EFE453BB7F1F756098BFD35')
-  const response = await Iugu.accounts.requestVerification({ data }, accountId)
-  expect(response.id).toBe('E77BDA83E2134644A43231FB1A8789ED')
-})
-test('should list invoices', async () => {
-  const urlParams: Map<string, string> = new Map()
-  urlParams.set('paid_at_from', '2019-01-30T00:00:00-03:00')
-  urlParams.set('paid_at_to', '2020-04-30T00:00:00-03:00')
+// test('should list invoices', async () => {
+//   const urlParams: Map<string, string> = new Map()
+//   urlParams.set('paid_at_from', '2019-01-30T00:00:00-03:00')
+//   urlParams.set('paid_at_to', '2020-04-30T00:00:00-03:00')
 
-  const resultInvoices = await Iugu.invoices.list('', undefined, urlParams) as any
-  expect(resultInvoices.totalItems).toBeDefined()
-})
+//   const resultInvoices = await Iugu.invoices.list('', undefined, urlParams) as any
+//   expect(resultInvoices.totalItems).toBeDefined()
+// })
 
-test('should create client', async () => {
-  const client: IuguClient = {
-    name: 'Vinicius Picanco',
-    email: 'teste@teste.com'
-  }
-  const resultClient = await Iugu.customers.create(client, undefined)
-  expect(resultClient.name).toBe(client.name)
-  expect(resultClient.email).toBe(client.email)
-  expect(resultClient.id).toBeDefined()
-})
+// test('should create client', async () => {
+//   const client: IuguClient = {
+//     name: 'Vinicius Picanco',
+//     email: 'teste@teste.com'
+//   }
+//   const resultClient = await Iugu.customers.create(client, undefined)
+//   expect(resultClient.name).toBe(client.name)
+//   expect(resultClient.email).toBe(client.email)
+//   expect(resultClient.id).toBeDefined()
+// })
 
-test('should create token', async () => {
-  const payment: IuguPaymentToken = {
-    account_id: iuguServices.accountId,
-    method: 'credit_card',
-    test: true,
-    data: {
-      number: '4111111111111111',
-      verification_value: '472',
-      first_name: 'Vinicius',
-      last_name: 'Picanco',
-      month: '07',
-      year: '2021'
-    }
-  }
-  const resultPayment = await Iugu.paymentToken.create(payment, undefined)
+// test('should create token', async () => {
+//   const payment: IuguPaymentToken = {
+//     account_id: iuguServices.accountId,
+//     method: 'credit_card',
+//     test: true,
+//     data: {
+//       number: '4111111111111111',
+//       verification_value: '472',
+//       first_name: 'Vinicius',
+//       last_name: 'Picanco',
+//       month: '07',
+//       year: '2021'
+//     }
+//   }
+//   const resultPayment = await Iugu.paymentToken.create(payment, undefined)
 
-  expect(resultPayment.id).toBeDefined()
-})
+//   expect(resultPayment.id).toBeDefined()
+// })
 
-test('should create invoice', async () => {
-  const date = new Date()
-  const invoice: IuguInvoice = {
-    email: 'teste@teste.com',
-    due_date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
-    items: [
-      {
-        description: 'Alcool em gel',
-        quantity: 1,
-        price_cents: 30000
-      }
-    ],
-    payer: {
-      cpf_cnpj: '34737969052',
-      name: 'Vinicius Picanco',
-      address: {
-        zip_code: '36010070',
-        number: '125'
-      }
-    }
-  }
-  const resultInvoice = await Iugu.invoices.create(invoice, undefined)
-  expect(resultInvoice.id).toBeDefined()
-})
+// test('should create invoice', async () => {
+//   const date = new Date()
+//   const invoice: IuguInvoice = {
+//     email: 'teste@teste.com',
+//     due_date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
+//     items: [
+//       {
+//         description: 'Alcool em gel',
+//         quantity: 1,
+//         price_cents: 30000
+//       }
+//     ],
+//     payer: {
+//       cpf_cnpj: '34737969052',
+//       name: 'Vinicius Picanco',
+//       address: {
+//         zip_code: '36010070',
+//         number: '125'
+//       }
+//     }
+//   }
+//   const resultInvoice = await Iugu.invoices.create(invoice, undefined)
+//   expect(resultInvoice.id).toBeDefined()
+// })
 
-test('should create payment methods', async () => {
-  const payment: IuguPaymentToken = {
-    account_id: iuguServices.accountId,
-    method: 'credit_card',
-    test: true,
-    data: {
-      number: '4111111111111111',
-      verification_value: '472',
-      first_name: 'Vinicius',
-      last_name: 'Picanco',
-      month: '07',
-      year: '2021'
-    }
-  }
-  const resultPayment = await Iugu.paymentToken.create(payment, undefined)
+// test('should create payment methods', async () => {
+//   const payment: IuguPaymentToken = {
+//     account_id: iuguServices.accountId,
+//     method: 'credit_card',
+//     test: true,
+//     data: {
+//       number: '4111111111111111',
+//       verification_value: '472',
+//       first_name: 'Vinicius',
+//       last_name: 'Picanco',
+//       month: '07',
+//       year: '2021'
+//     }
+//   }
+//   const resultPayment = await Iugu.paymentToken.create(payment, undefined)
 
-  const paymetMethod: IuguPaymentMethod = {
-    description: 'Meu cartão',
-    token: resultPayment.id,
-    set_as_default: false
-  }
-  const urlParams: Map<string, string> = new Map()
-  urlParams.set('customer_id', iuguServices.clientId)
-  const resultPaymentMethod = await Iugu.customers.createPaymentMethod(paymetMethod, urlParams)
-  expect(resultPaymentMethod.id).toBeDefined()
-})
+//   const paymetMethod: IuguPaymentMethod = {
+//     description: 'Meu cartão',
+//     token: resultPayment.id,
+//     set_as_default: false
+//   }
+//   const urlParams: Map<string, string> = new Map()
+//   urlParams.set('customer_id', iuguServices.clientId)
+//   const resultPaymentMethod = await Iugu.customers.createPaymentMethod(paymetMethod, urlParams)
+//   expect(resultPaymentMethod.id).toBeDefined()
+// })
 
-test('should create charge', async () => {
-  const date = new Date()
-  const invoice: IuguInvoice = {
-    email: 'teste@teste.com',
-    due_date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
-    items: [
-      {
-        description: 'Alcool em gel',
-        quantity: 1,
-        price_cents: 30000
-      }
-    ],
-    payer: {
-      cpf_cnpj: '34737969052',
-      name: 'Vinicius Picanco',
-      address: {
-        zip_code: '36010070',
-        number: '125'
-      }
-    }
-  }
+// test('should create charge', async () => {
+//   const date = new Date()
+//   const invoice: IuguInvoice = {
+//     email: 'teste@teste.com',
+//     due_date: date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
+//     items: [
+//       {
+//         description: 'Alcool em gel',
+//         quantity: 1,
+//         price_cents: 30000
+//       }
+//     ],
+//     payer: {
+//       cpf_cnpj: '34737969052',
+//       name: 'Vinicius Picanco',
+//       address: {
+//         zip_code: '36010070',
+//         number: '125'
+//       }
+//     }
+//   }
 
-  const resultInvoice = await Iugu.invoices.create(invoice, undefined)
-  const charge: IuguCharge = {
-    customer_payment_method_id: iuguServices.paymentMethodToken,
-    customer_id: iuguServices.clientId,
-    invoice_id: resultInvoice.id
-  }
+//   const resultInvoice = await Iugu.invoices.create(invoice, undefined)
+//   const charge: IuguCharge = {
+//     customer_payment_method_id: iuguServices.paymentMethodToken,
+//     customer_id: iuguServices.clientId,
+//     invoice_id: resultInvoice.id
+//   }
 
-  const resultCharge = await Iugu.charge.create(charge, undefined)
+//   const resultCharge = await Iugu.charge.create(charge, undefined)
 
-  expect(resultCharge.message).toBe('Autorizado')
-})
+//   expect(resultCharge.message).toBe('Autorizado')
+// })
