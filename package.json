@@ -1,6 +1,6 @@
 {
-  "name": "iugu-node-sdk",
-  "version": "0.1.1",
+  "name": "iugu-node-lib",
+  "version": "0.1.2",
   "description": "Biblioteca não-oficial da API Iugu para Node.js feita em Typescript",
   "main": "lib/iugu.js",
   "types": "lib/iugu.d.ts",
@@ -15,9 +15,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/classapp/iugu-node-sdk.git"
+    "url": "https://github.com/classapp/iugu-node-lib.git"
   },
-  "bugs:": "https://github.com/classapp/iugu-node-sdk/issues",
+  "bugs:": "https://github.com/classapp/iugu-node-lib/issues",
   "keywords": [
     "iugu",
     "sdk",
