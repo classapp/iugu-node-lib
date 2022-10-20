@@ -2,7 +2,7 @@ import nock from 'nock'
 import Iugu from '../../../iugu'
 
 test('should configure pix', async () => {
-  const apiKey = process.env.SUBACCOUNT_LIVE_API_KEY || 'C75D1F3B8F1468983A5018B68B6DD5E656C8C3008F29D19F28515A8D01C6ECEC'
+  const apiKey = process.env.SUBACCOUNT_LIVE_API_KEY || 'C75D123B8F1468983A5018B48B6DD52656C4C3008925D19F2851328D01C6ABEC'
   Iugu.setApiKey(apiKey)
   nock('https://api.iugu.com:443', { encodedQueryParams: true })
     .put('/v1/payments/pix', { enable: true })
