@@ -1,31 +1,33 @@
-# Iugu SDK para Node.JS
+# @classapp-tech/iugu-node-lib
 
-Com o objetivo de fornecer um SDK Node para acesso a API da Iugu de forma fácil e tipada.
+## Installation
+Use the package manager node to install.
 
-Para instalar a biblioteca:
+```bash
+npm install @classapp-tech/iugu-node-sdk
+```
 
-`npm install iugu-node-sdk`
+## Usage
+Initialize the sdk using you API key, previously generated:
 
-## Como usar
-
-Com sua API key gerada pela plataformada da Iugu inicialize o sdk:
-```ts
+```bash
 import Iugu, { IuguCustomer } from 'iugu-node-sdk'
 
-Iugu.setApiKey('<SUA API KEY>')
+Iugu.setApiKey('<YOUR API KEY>')
 ```
-Existe alguns models que foram criados para padronizar as respostas e requisição para a API.
-Um exemplo de utilização da API em TypeScript para criação de um cliente:
-```ts
+There are some models that were created to standardize the responses and requests for the API.
+An example of using the API in TypeScript to create a client:
+
+```bash
 const client: IuguCustomer = {
-    name: 'Vinicius Picanco',
-    email: 'teste@teste.com'
+    name: 'John Doe',
+    email: 'mail@domain.com'
 }
 
-// Pode ser utilizar com await
+// You can use await
 const resultClient : IuguCustomer = await Iugu.customers.create(client, undefined)
 
-// Ou
+// Or you can use .then
 Iugu.customers.create(client, undefined).then((cli: IuguCustomer) => {
     // On success
 }).catch((error: Error) => {
@@ -33,14 +35,12 @@ Iugu.customers.create(client, undefined).then((cli: IuguCustomer) => {
 })
 ```
 
-Todas os métodos seguem o parametro de Iugu._{recurso}_._{método}_(_model_,_urlParams_)
+All methods follow the pattern Iugu._{resource}_._{method}_(_model_,_urlParams_) - URL parameters must be passed by the second parameter of the methods, as follows:
 
-Os parâmetros de URL devem ser passados pelo segundo parâmetro dos métodos, da seguinte forma:
-
-```ts
+```bash
 const client: IuguCustomer = {
-    name: 'Vinicius Picanco',
-    email: 'teste@teste.com'
+    name: 'John Doe',
+    email: 'mail@domain.com'
 }
 
 const urlParams: Map<string, string> = new Map()
@@ -57,28 +57,11 @@ Iugu.customers.create(client, urlParams).then((cli: IuguCustomer) => {
 })
 ```
 
-## Observação
-Para saber quais requisições estão disponíveis e quais parâmetros passar acesse a documentação [dev.iugu.com/reference](https://dev.iugu.com/reference) para referência.
+## More info
+To find out which requests are available and which parameters to pass, access the documentation [dev.iugu.com/reference](https://dev.iugu.com/reference) for reference.
 
-## Testes
-Para o funcionamento dos testes crie um arquivo chamado _iugu\_services.json_ na pasta _tests_ com os seguintes dados:
+## Credits
+- This library was created based on the [Vinícius Picanço](https://github.com/V1pi) repository.
 
-```json
-{
-    "accountId": "<SUA ACCOUNT ID>",
-    "apiKey": "<API KEY PREFERENCIALMENTE DE TESTES>",
-    "clientId": "<UM CLIENT ID VÁLIDO>",
-    "paymentMethodToken": "<<UM TOKEN DE FORMA DE PAGAMENTO VÁLIDO>>"
-}
-```
-
-Se for contribuir sempre crie e execute os testes:
-
-`npm run test`
-
-
-## Créditos
-
-Escrito por [Vinícius Picanço](https://github.com/V1pi) (viniciusspicanco@gmail.com).<br>
-Agradeço a contribuição de:
-- [kurybr](https://github.com/kurybr)
+## Keywords
+iugu

@@ -1,25 +1,13 @@
-0.1.1 January 05, 2021
-  - Added new route
-0.1.0 December 29, 2020
-  - Changed DTO client for customer
-  - Added DTO for subscriptions
-0.0.9 December 29, 2020
-  - Added new method capture
-0.0.8 July 03, 2020
-  - Changed update 'post' for 'put'
-0.0.7 July 03, 2020
-  - Fixed subscriptions activate
-0.0.6 May 22, 2020
-  - Fixed query params
-0.0.5 April 07, 2020
-  - Fixed model name
-0.0.4 April 07, 2020
-  - Added query params support
-0.0.3 March 24, 2020
-  - New models (IuguAccount, IuguCommissions, IuguConfigAccount, IuguConfigAccountBankSlip, IuguConfiguration, IuguConfigAccountCreditCard, IuguEarlyPaymentDiscount, IuguInformation, IuguVerificationAccount, IuguVerificationData, IuguInfoAccount, IuguLastVerificationRequestData, IuguWithdrawRequest, IuguCustomVariable)
-  - Added new method for Accounts resource called 'requestConfiguration'
-  - Updated package.json
-0.0.2 March 23, 2020
-  - Published
-0.0.1 March 19, 2020
-  - Initial release
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
+and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## [Unreleased]
+
+### Fixed
+
+### Chore
+
+- Added support for PIX
