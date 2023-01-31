@@ -4,7 +4,7 @@
 Use the package manager node to install.
 
 ```bash
-npm install @classapp-tech/iugu-node-sdk
+npm install @classapp-tech/iugu-node-lib
 ```
 
 ## Usage
